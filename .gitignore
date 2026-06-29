@@ -1,4 +1,4 @@
-venv/
+!venv/
 expense_tracker.db
 __pycache__/
 *.pyc
@@ -6,3 +6,4 @@ __pycache__/
 .env
 .DS_Store
 .claude/plans/
+file.md
