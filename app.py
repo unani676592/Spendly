@@ -1,6 +1,16 @@
 from flask import Flask, render_template
 
+from database import db
+
 app = Flask(__name__)
+
+# Close the request-scoped SQLite connection after each request.
+app.teardown_appcontext(db.close_db)
+
+# Ensure the database exists and is seeded on startup.
+with app.app_context():
+    db.init_db()
+    db.seed_db()
 
 
 # ------------------------------------------------------------------ #
@@ -62,4 +72,7 @@ def delete_expense(id):
 
 
 if __name__ == "__main__":
+    # Ensure the database exists and has sample data before serving.
+    db.init_db()
+    db.seed_db()
     app.run(debug=True, port=5001)
